@@ -44,8 +44,8 @@ const App = (props) => {
           <FavoriteMovieList favoriteMovies={favoriteMovies}/>
         
           <Switch>
-            <Route path="/movies/add-movies">
-              <AddMovie/>
+            <Route path="/movies/add">
+              <AddMovie favoriteMovies={favoriteMovies} setFavoriteMovies={setFavoriteMovies} />
             </Route>
 
 
