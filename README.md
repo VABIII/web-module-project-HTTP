@@ -110,3 +110,5 @@ CRUD applications are the foundation of most web applications. Being able to man
 - [ ] Connect your fork to Codegrade using the "Connect Git" button.
 - [ ] Find your newly created fork from the list and push your work to main.
 - [ ] Check this video for details: www.youtube.com/watch?v=fC2BO7dI6IQ
+
+Ok, got it. Thanks!
