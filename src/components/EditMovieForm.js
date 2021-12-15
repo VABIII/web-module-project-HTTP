@@ -5,9 +5,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const EditMovieForm = (props) => {
-	const { push } = useHistory();
-
-	const { setMovies } = props;
 	const [movie, setMovie] = useState({
 		title:"",
 		director: "",
@@ -15,8 +12,11 @@ const EditMovieForm = (props) => {
 		metascore: 0,
 		description: ""
 	});
-
+	const { title, director, genre, metascore, description } = movie;
+	const { setMovies } = props;
+	const { push } = useHistory();
     const { id } = useParams();
+
 
     useEffect(()=>{
         axios.get(`http://localhost:9000/api/movies/${id}`)
@@ -24,32 +24,37 @@ const EditMovieForm = (props) => {
                 setMovie(res.data);
             })
 	}, [id]);
-	
+
+	const editMovie = (edits) => {
+		axios.put(`http://localhost:9000/api/movies/${id}`, edits)
+			.then(res => {
+				console.log(res);
+				const movies = res.data
+				setMovies(movies)
+			})
+			.catch(err => {
+				console.error(err);
+			});
+	};
+
 	const handleChange = (e) => {
         setMovie({
             ...movie,
             [e.target.name]: e.target.value
         });
-    }
+    };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        axios.put(`http://localhost:9000/api/movies/${id}`, movie)
-            .then(res=>{
-                setMovies(res.data);
-                push(`/movies/${movie.id}`);
-			})
-			.catch(err=>{
-				console.log(err);
-			})
-	}
-	
-	const { title, director, genre, metascore, description } = movie;
+	const onSubmit = evt => {
+		evt.preventDefault();
+		editMovie(movie);
+		push(`/movies/${id}`);
+	};
+
 
     return (
 	<div className="col">
 		<div className="modal-content">
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={onSubmit}>
 				<div className="modal-header">						
 					<h4 className="modal-title">Editing <strong>{movie.title}</strong></h4>
 				</div>
