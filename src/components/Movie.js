@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
-
 import axios from 'axios';
+import DeleteMovieModal from "./DeleteMovieModal";
 
 const Movie = (props) => {
     const [movie, setMovie] = useState('');
+    const [toggle, setToggle] = useState(false);
     const { setMovies ,addToFavorites } = props;
     const { id } = useParams();
     const { push } = useHistory();
@@ -31,10 +32,15 @@ const Movie = (props) => {
             });
     };
 
-    const handleDelete = evt => {
-        evt.preventDefault();
+    const handleDelete = (id) => {
         deleteMovie(id);
+        window.location.href= "/movies"
     };
+
+    const setIsToggled = () => {
+        setToggle(!toggle);
+    };
+
 
     return(<div className="modal-page col">
         <div className="modal-dialog">
@@ -69,12 +75,19 @@ const Movie = (props) => {
                             <Link to={`/movies/edit/${movie.id}`} className="m-2 btn btn-success">Edit</Link>
                             <span className="delete">
                                 <input
-                                onClick={handleDelete}
+                                onClick={setIsToggled}
                                 type="button"
                                 className="m-2 btn btn-danger"
                                 value="Delete"
                             />
                             </span>
+                            {
+                                toggle && <DeleteMovieModal
+                                handleDelete={handleDelete}
+                                setIsToggled={setIsToggled}
+                                toggle={toggle}
+                            />
+                            }
                         </section>
                     </div>
                 </div>
