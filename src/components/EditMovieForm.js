@@ -37,10 +37,10 @@ const EditMovieForm = (props) => {
 			});
 	};
 
-	const handleChange = (e) => {
+	const handleChange = evt => {
         setMovie({
             ...movie,
-            [e.target.name]: e.target.value
+            [evt.target.name]: evt.target.value
         });
     };
 
@@ -49,7 +49,6 @@ const EditMovieForm = (props) => {
 		editMovie(movie);
 		push(`/movies/${id}`);
 	};
-
 
     return (
 	<div className="col">
@@ -79,7 +78,6 @@ const EditMovieForm = (props) => {
 						<label>Description</label>
 						<textarea value={description} onChange={handleChange} name="description" className="form-control"></textarea>
 					</div>
-									
 				</div>
 				<div className="modal-footer">
 					<input type="submit" className="btn btn-info" value="Save"/>

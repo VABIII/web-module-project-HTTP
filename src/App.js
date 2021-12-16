@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { Route, Switch, Redirect } from "react-router-dom";
 import MovieList from './components/MovieList';
@@ -8,29 +8,10 @@ import MovieHeader from './components/MovieHeader';
 import AddMovie from "./components/AddMovie";
 import FavoriteMovieList from './components/FavoriteMovieList';
 
-import axios from 'axios';
 
-const App = (props) => {
+const App = () => {
   const [movies, setMovies] = useState([]);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
-  console.log(movies);
-
-  useEffect(()=>{
-    axios.get('http://localhost:9000/api/movies')
-      .then(res => {
-        setMovies(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
-
-  const deleteMovie = (id)=> {
-  }
-
-  const addToFavorites = (movie) => {
-    
-  }
 
   return (
     <div>
@@ -58,7 +39,7 @@ const App = (props) => {
             </Route>
 
             <Route path="/movies">
-              <MovieList movies={movies}/>
+              <MovieList movies={movies} setMovies={setMovies}/>
             </Route>
 
             <Route path="/">
@@ -70,7 +51,6 @@ const App = (props) => {
     </div>
   );
 };
-
 
 export default App;
 
