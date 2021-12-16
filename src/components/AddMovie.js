@@ -62,7 +62,7 @@ const AddMovie = props => {
                                 />
                             </div>
                             <div  className="form-group">
-                                <label>Director:&nbsp;</label>
+                                <label htmlFor="director">Director:&nbsp;</label>
                                 <input
                                     type="text"
                                     name="director"
@@ -85,8 +85,8 @@ const AddMovie = props => {
                                 <label>Metascore:&nbsp;</label>
                                 <input
                                     type="number"
-                                    name="director"
-                                    value={values.director}
+                                    name="metascore"
+                                    value={values.metascore}
                                     onChange={onChange}
                                     className="form-control"
                                 />
